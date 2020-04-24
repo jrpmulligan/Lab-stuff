@@ -10,22 +10,20 @@ def Gettheinfo(gffarray): #get the information needed for the table
     theinfo=[]
     for i in gffarray:
         u=[]
-        if 'EoCCA6' in i:
-            z=i.split()
-            if 'CDS' in i: #helps make index numbers consistent
-                z.remove('CDS')
-            
-            if len(z)>=8:
-                gene=re.search('EoCCA6(.+?);',z[8])#getting the geneID
-                if gene !=None:
-                    u=[z[0],gene.group(0),z[3],z[4]]#information index numbers into new array
-                    if z[6]=='+':
-                        u.append('forward')
-                        u.append('1')
-                    else:
-                        u.append('reverse')
-                        u.append('-1')
-                    theinfo.append(u) #add array to matric
+        z=i.split()
+        if 'CDS' in i: #helps make index numbers consistent
+            z.remove('CDS')
+        if len(z)>=8:
+            gene=re.search('ID=(.+?);',z[8])#getting the geneID
+            if gene !=None:
+                u=[z[0],gene.group(1),z[3],z[4]]#information index numbers into new array
+                if z[6]=='+':
+                    u.append('forward')
+                    u.append('1')
+                else:
+                    u.append('reverse')
+                    u.append('-1')
+                theinfo.append(u) #add array to matric
                 
     return theinfo
 theinfo=(Gettheinfo(farray))
