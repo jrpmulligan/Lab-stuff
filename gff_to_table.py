@@ -41,7 +41,12 @@ def Gettheinfo(gffarray): #get the information needed for the table
     return theinfo
 theinfo=(Gettheinfo(farray))
 
+orig_stdout=sys.stdout #print to file
+g=open(sys.argv[2],'w')
+sys.stdout=g
 print('molecule\tgene\tstart\tend\tstrand\tdirection')
 for h in theinfo:      
     print(h[0]+'\t'+h[1]+'\t'+h[2]+'\t'+h[3]+'\t'+h[4]+'\t'+h[5])
+sys.stdout=orig_stdout
+g.close()
 
